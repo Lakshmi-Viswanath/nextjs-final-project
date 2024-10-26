@@ -1,13 +1,15 @@
 import Checkout from "@/components/Checkout";
+import Navigation from "@/components/Navigation";
 
 
 
-const Checkout = () => {
+const CheckoutPage = () => {
   return (
     <div>
+        <Navigation />
        <Checkout />
     </div>
   );
 };
 
-export default Checkout;
+export default CheckoutPage;
