@@ -15,7 +15,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password);
-    //router.push('/'); // Redirect to the home page after successful login
+    router.push('/product'); // Redirect to the home page after successful login
   };
 
   return (

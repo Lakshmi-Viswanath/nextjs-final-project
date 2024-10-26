@@ -1,16 +1,3 @@
-/* import  Link from 'next/link';
-import LoginPage from './auth/login';
-import Dashboard from '@/components/Dashboard';
-
-export default function Home(){
-  return(
-    <>
-    <Dashboard/>
-    <LoginPage/>
-    </>
-  )
-}
-*/
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/pages/context/AuthContext';
 import LoginPage from './auth/login';

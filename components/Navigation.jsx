@@ -1,34 +1,23 @@
-import { Nav, Navbar } from "react-bootstrap";
-import  Link  from "next/link";
-import Container from "react-bootstrap/Container";
 import { useSelector } from "react-redux";
+import Link from "next/link";
+import styles from '@/styles/components/Navigation.module.css'; 
 
 const Navigation = () => {
-
-
-    const productsInCart = useSelector((state)=> state.cart)
+  const productsInCart = useSelector((state) => state.cart);
 
   return (
-    <>
-      <Navbar bg="light" expand="lg">
-        <Container fluid>
-          <Nav>
-          <Link href="/dashboard" style={{ textDecoration: 'none', color: 'black' }}>
-              <h3>eCommerce Store</h3>
-            </Link>
-            </Nav>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              <Link href="/cart" as={Link}>
-                My Cart  {productsInCart.length}
-              </Link>
-              </Navbar.Text>
-            </Navbar.Collapse>
-         
-        </Container>
-      </Navbar>
-    </>
+    <nav className={styles.navbar}>
+      <div className={styles.container}>
+        <Link href="/dashboard" className={styles.brand}>
+          <h3>eCommerce Store</h3>
+        </Link>
+        <div className={styles.cartContainer}>
+          <Link href="/cart" className={styles.cartLink}>
+            My Cart {productsInCart.length}
+          </Link>
+        </div>
+      </div>
+    </nav>
   );
 };
 

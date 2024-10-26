@@ -1,64 +1,69 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../store/productSlice";
-import { Alert, Button, Card } from "react-bootstrap";
 import { addItemsinCart } from "../store/cartSlice";
+import { useRouter } from 'next/router'; // Import useRouter for navigation
+import styles from '@/styles/components/Product.module.css';
 
 const Products = () => {
   const dispatch = useDispatch();
-  const { data: products = [], status } = useSelector(
-    (state) => state.products
-  );
+  const { data: products = [], status } = useSelector((state) => state.products);
+  const [error, setError] = useState(null);
+  const router = useRouter(); // Initialize the router
+
   useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+    const fetchProducts = async () => {
+      try {
+        await dispatch(getProducts());
+      } catch (err) {
+        setError("Some error occurred while fetching products.");
+      }
+    };
 
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
+    fetchProducts();
+  }, [dispatch]);
 
-  if (status === "error") {
-    return (
-      <Alert key="danger" variant="danger">
-        Some error occured
-      </Alert>
-    );
-  }
+  const addToCart = (product) => {
+    dispatch(addItemsinCart(product));
+  };
 
-  const addToCart = (product)=>{
-    dispatch(addItemsinCart(product))
-  }
+  const goToDetails = (productId) => {
+    router.push(`/product/${productId}`); // Navigate to product details page
+  };
 
   const cards = products.map((product, index) => (
-    <div className="col-md-3" key={index}>
-      <Card style={{ width: "18em" }}>
+    <div className={styles.cardContainer} key={index}>
+      <div className={styles.card}>
         <div className="text-center">
-          <Card.Img
-            variant="top"
+          <img
             src={product.image}
-            style={{ height: "150px", width: "150px" }}
-          ></Card.Img>
+            alt={product.title}
+            className={styles.cardImage}
+          />
         </div>
-        <Card.Body>
-          <Card.Title className="text-center">
-            {product.title} Title
-            <Card.Text>{product.price}</Card.Text>
-          </Card.Title>
-        </Card.Body>
-        <Card.Footer style={{ backgroundColor: "lightgrey" }}>
-            <Button variant="primary" onClick={()=> addToCart(product)}>Buy Now</Button>
-        </Card.Footer>
-      </Card>
+        <div className={styles.cardBody}>
+          <h5 className="text-center">{product.title}</h5>
+          <p className="text-center">${product.price}</p>
+        </div>
+        <div className={styles.cardFooter}>
+          <button className={styles.learnMoreButton} onClick={() => goToDetails(product.id)}>
+            Learn More
+          </button>
+          <button className={styles.buyButton} onClick={() => addToCart(product)}>
+            Buy Now
+          </button>
+        </div>
+      </div>
     </div>
   ));
 
   return (
     <>
-      <h2>Products Page </h2>
-      <section style={{display:"flex",flexDirection:"row", flexWrap:"wrap", justifyContent:"space-evenly"}}>
-      {cards} 
+      <h2>Products Page</h2>
+      {error && <div className={styles.errorAlert}>{error}</div>}
+      <section className={styles.productsSection}>
+        {cards}
       </section>
-      
     </>
   );
 };

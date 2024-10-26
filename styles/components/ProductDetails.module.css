@@ -1,0 +1,80 @@
+.productsSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .cardContainer {
+    flex: 0 0 calc(25% - 30px); /* 25% width with a margin adjustment */
+    max-width: 150px; /* Optional max width for larger screens */
+    box-sizing: border-box;
+  }
+  
+  @media (max-width: 992px) {
+    .cardContainer {
+      flex: 0 0 calc(33.33% - 20px); /* 3 cards per row on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cardContainer {
+      flex: 0 0 calc(50% - 20px); /* 2 cards per row on smaller screens */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .cardContainer {
+      flex: 0 0 100%; /* Full width on very small screens */
+    }
+  }
+  
+  .card {
+    width: 25%;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .cardImage {
+    height: 120px; /* Medium-sized image */
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .cardBody {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .cardFooter {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding-top: 8px;
+  }
+  
+  .buyButton {
+    padding: 6px 10px;
+    font-size: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .buyButton:hover {
+    background-color: #0056b3;
+  }
+  
