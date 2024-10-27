@@ -8,7 +8,7 @@ const Navigation = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
-        <Link href="/dashboard" className={styles.brand}>
+        <Link href="/product" className={styles.brand}>
           <h3>eCommerce Store</h3>
         </Link>
         <div className={styles.cartContainer}>

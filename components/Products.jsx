@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../store/productSlice";
 import { addItemsinCart } from "../store/cartSlice";
-import { useRouter } from 'next/router'; // Import useRouter for navigation
+import { useRouter } from 'next/router';
 import styles from '@/styles/components/Product.module.css';
 
 const Products = () => {
